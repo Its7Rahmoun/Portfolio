@@ -1,0 +1,354 @@
+{
+    "profile": {
+        "name": "Rahmoun Oussama",
+        "title": "Full Stack Engineer | Cloud Engineer",
+        "bio": "AWS Certified Cloud Solutions Architect Associate. Passionate about building robust, scalable cloud-native applications and microservices.",
+        "location": "Casablanca, Morocco",
+        "email": "rahmoun.oussamaeng@gmail.com",
+        "social": {
+            "github": "https://github.com/Its7Rahmoun",
+            "linkedin": "https://www.linkedin.com/in/oussama-rahmoun-172b53238/",
+            "twitter": ""
+        }
+    },
+    "skills": [
+        {
+            "category": "Programming & Web",
+            "items": [
+                "Java (Proficient)",
+                "Python",
+                "TypeScript",
+                "HTML/CSS/JavaScript",
+                "REST APIs",
+                "WebSocket"
+            ]
+        },
+        {
+            "category": "Frameworks & Libraries",
+            "items": [
+                "Spring Boot",
+                "Angular",
+                "React",
+                "Hibernate",
+                "Flask",
+                "ExpressJs",
+                "NextJs"
+            ]
+        },
+        {
+            "category": "Cloud & DevOps",
+            "items": [
+                "AWS (ECS, Lambda, EC2, S3, CloudWatch, IAM, VPC, SNS, SQS, EventBridge)",
+                "Kubernetes",
+                "Docker",
+                "Git",
+                "GitHub Actions",
+                "Jenkins",
+                "CI/CD pipelines",
+                "Terraform",
+                "CloudFormation",
+                "GCP"
+            ]
+        },
+        {
+            "category": "Databases",
+            "items": [
+                "MySQL",
+                "PostgreSQL",
+                "Oracle (PL/SQL)",
+                "DynamoDB",
+                "MongoDB",
+                "Redis"
+            ]
+        },
+        {
+            "category": "Architecture & Design",
+            "items": [
+                "Microservices",
+                "Monolithic",
+                "Serverless",
+                "Event-Driven (EDA)",
+                "OOP",
+                "Design Patterns",
+                "SOLID Principles"
+            ]
+        },
+        {
+            "category": "Data & Messaging",
+            "items": [
+                "Kafka",
+                "Elasticsearch",
+                "RabbitMQ"
+            ]
+        },
+        {
+            "category": "Security & Authentication",
+            "items": [
+                "Keycloak",
+                "OAuth2",
+                "JWT",
+                "OpenID Connect",
+                "AWS IAM",
+                "VPC security"
+            ]
+        },
+        {
+            "category": "Testing & Tools",
+            "items": [
+                "Postman",
+                "Swagger/OpenAPI",
+                "JUnit",
+                "Linux (Ubuntu, Amazon Linux)"
+            ]
+        },
+        {
+            "category": "Methodology & AI",
+            "items": [
+                "Agile (SCRUM)",
+                "Reinforcement Learning",
+                "Deep Learning",
+                "NLP",
+                "AI-Augmented Development"
+            ]
+        }
+    ],
+    "projects": [
+        {
+            "id": "1",
+            "title": "Recruitment Platform with AI",
+            "coverName": "job-sourcing",
+            "description": "Developed and Deployed a microservices-based recruitment platform with integrated AI features, enabling efficient candidate-job matching, streamlined hiring processes, and low-latency performance.",
+            "image": "",
+            "link": "",
+            "github": "",
+            "year": "2025",
+            "tags": [
+                "Microservices",
+                "AI",
+                "Cloud",
+                "AWS"
+            ],
+            "highlights": []
+        },
+        {
+            "id": "2",
+            "title": "QBDEX - Pharmaceutical Quality by Design",
+            "coverName": "qbdex",
+            "description": "Built QBDEX, a pharmaceutical Quality by Design (QbD) application, enabling streamlined experimental planning, process optimization, and enhanced regulatory compliance.",
+            "image": "",
+            "link": "",
+            "github": "",
+            "year": "2025",
+            "tags": [
+                "Optimization",
+                "Compliance",
+                "AWS"
+            ],
+            "highlights": []
+        },
+        {
+            "id": "3",
+            "title": "Zenger - News Management System",
+            "coverName": "zenger",
+            "description": "A news management and distribution system ensuring 100% verification through AI. Designed to guarantee accuracy, credibility, and real-time delivery of media content.",
+            "image": "",
+            "link": "",
+            "github": "",
+            "year": "2026",
+            "tags": [
+                "AI",
+                "Real-time",
+                "Media",
+                "GCP",
+                "GKE"
+            ],
+            "highlights": []
+        }
+    ],
+    "personalProjects": [
+        {
+            "title": "Tic Tac Toe AI (AlphaGo)",
+            "description": "Implemented a Reinforcement Learning AI agent using the AlphaGo algorithm. The agent learns from self-play to master the game of Tic Tac Toe, simulating human-like moves and adapting strategies.",
+            "github": "https://github.com/Its7Rahmoun/tictactoe_AI_player",
+            "tags": [
+                "Python",
+                "Reinforcement Learning",
+                "AlphaGo",
+                "AI"
+            ]
+        },
+        {
+            "title": "Deep Fake Detection",
+            "description": "Developed a Deep Fake detection system using LSTM-based Artificial Neural Networks. Detects manipulated media content to combat misinformation and ensure digital content authenticity.",
+            "github": "https://github.com/Its7Rahmoun/deep_feke_detection",
+            "tags": [
+                "Deep Learning",
+                "LSTM",
+                "Computer Vision",
+                "Python"
+            ]
+        },
+        {
+            "title": "ANN from Scratch (Cat vs Dog)",
+            "description": "Built an Artificial Neural Network from scratch using only NumPy. Implements forward and backward propagation to classify images of cats and dogs without relying on high-level ML frameworks.",
+            "github": "https://github.com/Its7Rahmoun/ANN_detection_cat_dog_problem",
+            "tags": [
+                "NumPy",
+                "Neural Networks",
+                "Mathematics",
+                "Python"
+            ]
+        }
+    ],
+    "experience": [
+        {
+            "year": "Nov 2024 – Present",
+            "title": "Full Stack Developer | Cloud Engineer",
+            "company": "Centoria Services / Casablanca, Maroc",
+            "details": [
+                "Designed and developed web applications using Spring Boot, Node.js, Express.js, and Next.js, optimized for high performance and low latency.",
+                "Implemented CI/CD pipelines on Google Cloud to automate build, testing, and deployment processes, reducing manual errors and accelerating releases.",
+                "Deployed applications on Google Kubernetes Engine (GKE) using GitOps strategies with ArgoCD, improving deployment reliability and reproducibility.",
+                "Designed scalable cloud architectures on GCP (GKE, Cloud Run, Cloud Storage) ensuring high availability and automatic scaling."
+            ],
+            "metrics": [
+                {
+                    "value": "100%",
+                    "label": "Automated"
+                },
+                {
+                    "value": "GCP",
+                    "label": "Environment"
+                },
+                {
+                    "value": "Low",
+                    "label": "Latency"
+                }
+            ],
+            "technologies": [
+                "Spring Boot",
+                "Node.js",
+                "Next.js",
+                "GCP",
+                "Kubernetes",
+                "ArgoCD",
+                "Docker"
+            ]
+        },
+        {
+            "year": "Jan 2024 – Oct 2025",
+            "title": "Full Stack Developer | AWS DevOps Engineer",
+            "company": "OpenMind Services | Casablanca, Morocco",
+            "details": [
+                "Designed and developed multiple enterprise-level microservice applications using Spring Boot, Spring Cloud, Angular, and Docker, with Keycloak authentication.",
+                "Improved system efficiency by 11% and reduced response time by 20% across critical modules.",
+                "Built robust microservices communication using REST APIs and Kafka/AWS SQS across 15+ distributed microservices.",
+                "Integrated AI-powered features with Large Language Models (LLMs) into large-scale microservices, automating processing of tens of thousands of records per month.",
+                "Implemented and optimized CI/CD pipelines for a 5-developer team, reducing deployment time from hours to under 1 hour (75% faster).",
+                "Delivered robust infrastructure solutions leveraging serverless and compute services (ECS, EKS, EC2).",
+                "Enhanced cloud security, protecting sensitive data, reducing unauthorized access incidents by 90%.",
+                "Engineered an event-driven architecture to enable asynchronous communication, improve scalability, and decouple services. "
+            ],
+            "metrics": [
+                {
+                    "value": "99.99%",
+                    "label": "Availability"
+                },
+                {
+                    "value": "75%",
+                    "label": "Faster Deploy"
+                },
+                {
+                    "value": "90%",
+                    "label": "Less Incidents"
+                }
+            ],
+            "technologies": [
+                "Spring Boot",
+                "Angular",
+                "AWS EKS",
+                "Kafka",
+                "Docker",
+                "Keycloak",
+                "Terraform"
+            ]
+        }
+    ],
+    "certifications": [
+        {
+            "name": "AWS Certified Solutions Architect Associate",
+            "year": "2025",
+            "issuer": "Amazon Web Services"
+        },
+        {
+            "name": "AWS Certified Cloud Practitioner",
+            "year": "2025",
+            "issuer": "Amazon Web Services"
+        }
+    ],
+    "education": [
+        {
+            "degree": "Master’s Degree Computer Science",
+            "school": "Faculty of Science and Technology",
+            "year": "2022 - 2024",
+            "description": "Specialized in Software Engineering and Cloud Computing"
+        },
+        {
+            "degree": "Bachelor’s Degree Computer Engineering",
+            "school": "Faculty of Sciences and Technologies",
+            "year": "2021 - 2022",
+            "description": "Focus on Computer Systems & Networks"
+        }
+    ],
+    "languages": [
+        {
+            "language": "English",
+            "level": "Professional Working Proficiency",
+            "code": "GB",
+            "percentage": 90
+        },
+        {
+            "language": "French",
+            "level": "Professional Working Proficiency",
+            "code": "FR",
+            "percentage": 75
+        },
+        {
+            "language": "Turkish",
+            "level": "Native or Bilingual",
+            "code": "TR",
+            "percentage": 70
+        },
+        {
+            "language": "Arabic",
+            "level": "Native or Bilingual",
+            "code": "SA",
+            "percentage": 100
+        }
+    ],
+    "aboutHighlights": [
+        {
+            "icon": "🏗️",
+            "text": "Microservices & Cloud",
+            "textFr": "Microservices & Cloud"
+        },
+        {
+            "icon": "🤖",
+            "text": "AI Integration",
+            "textFr": "Intégration IA"
+        },
+        {
+            "icon": "☁️",
+            "text": "AWS Solution Architect",
+            "textFr": "Architecte AWS"
+        },
+        {
+            "icon": "🔧",
+            "text": "DevOps & CI/CD",
+            "textFr": "DevOps & CI/CD"
+        }
+    ],
+    "contact": {
+        "message": "Interested in working together?"
+    }
+}
