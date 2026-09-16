@@ -121,3 +121,8 @@ dist
 # Vite
 dist-ssr
 *.local
+
+# SEO files regenerated on each build (see scripts/generate-seo.mjs)
+public/robots.txt
+public/sitemap.xml
+public/llms.txt

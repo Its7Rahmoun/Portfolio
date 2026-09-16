@@ -1,7 +1,7 @@
-
 import { PortfolioData } from '@/hooks/usePortfolioData';
 import { motion } from 'motion/react';
 import { Github, FolderGit2, ArrowUpRight } from 'lucide-react';
+import { GlassCard } from '@/components/layout/GlassCard';
 
 interface PersonalProjectsProps {
     darkMode: boolean;
@@ -11,70 +11,62 @@ interface PersonalProjectsProps {
 
 export function PersonalProjects({ darkMode, language, projects }: PersonalProjectsProps) {
     return (
-        <section className={`py-24 ${darkMode ? 'bg-[#0B1120]' : 'bg-gray-50'}`}>
-            <div className="max-w-7xl mx-auto px-6 lg:px-12">
-
-                {/* Header */}
-                <div className="flex items-center gap-4 mb-12">
-                    <div className={`p-3 rounded-xl ${darkMode ? 'bg-indigo-500/10 text-indigo-400' : 'bg-indigo-100 text-indigo-600'}`}>
-                        <FolderGit2 size={24} />
+        <section id="personal" className="py-24 md:py-32">
+            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                <div className="mb-12 flex items-center gap-4">
+                    <div className={`rounded-xl p-3 ${darkMode ? 'bg-indigo-500/15 text-indigo-300' : 'bg-indigo-100 text-indigo-700'}`}>
+                        <FolderGit2 size={24} aria-hidden="true" />
                     </div>
                     <div>
-                        <h2 className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                        <h2 className={`font-display text-3xl font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                             {language === 'en' ? 'Personal Projects' : 'Projets Personnels'}
                         </h2>
-                        <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                            {language === 'en' ? 'Explorations in AI & Machine Learning' : 'Explorations en IA et Machine Learning'}
+                        <p className={`text-sm ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>
+                            {language === 'en' ? 'Explorations in AI and machine learning' : 'Explorations en IA et machine learning'}
                         </p>
                     </div>
                 </div>
-
-                {/* Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {projects && projects.map((project, index) => (
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {projects?.map((project, index) => (
                         <motion.a
-                            key={index}
+                            key={project.title}
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            whileHover={{ y: -5 }}
-                            className={`group flex flex-col p-6 rounded-2xl border transition-all ${darkMode
-                                    ? 'bg-[#151B2E] border-white/5 hover:border-indigo-500/30'
-                                    : 'bg-white border-gray-100 hover:border-indigo-500/30 shadow-lg shadow-gray-200/50'
-                                }`}
+                            transition={{ delay: index * 0.08 }}
+                            className="group block cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300"
                         >
-                            <div className="flex items-start justify-between mb-4">
-                                <FolderGit2 size={40} className="text-indigo-500" />
-                                <div className={`p-2 rounded-full transition-colors ${darkMode ? 'bg-white/5 group-hover:bg-indigo-500/20 text-gray-400 group-hover:text-indigo-400' : 'bg-gray-100 group-hover:bg-indigo-100 text-gray-500 group-hover:text-indigo-600'}`}>
-                                    <ArrowUpRight size={18} />
-                                </div>
-                            </div>
-
-                            <h3 className={`text-xl font-bold mb-3 ${darkMode ? 'text-white group-hover:text-indigo-400' : 'text-gray-900 group-hover:text-indigo-600'} transition-colors`}>
-                                {project.title}
-                            </h3>
-
-                            <p className={`text-sm mb-6 flex-1 leading-relaxed ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                                {project.description}
-                            </p>
-
-                            <div className="flex flex-wrap gap-2 mt-auto">
-                                {project.tags.map((tag, tIndex) => (
-                                    <span
-                                        key={tIndex}
-                                        className={`text-xs px-2.5 py-1 rounded-md font-medium ${darkMode
-                                                ? 'bg-indigo-500/10 text-indigo-300'
-                                                : 'bg-indigo-50 text-indigo-700'
-                                            }`}
-                                    >
-                                        {tag}
+                            <GlassCard darkMode={darkMode} hoverAccent="hover:border-indigo-400/40" className="flex h-full flex-col p-6">
+                                <div className="mb-4 flex items-start justify-between">
+                                    <Github size={28} className="text-indigo-400" aria-hidden="true" />
+                                    <span className={`rounded-full p-2 ${darkMode ? 'bg-white/5 text-slate-300 group-hover:text-indigo-300' : 'bg-slate-100 text-slate-500'}`}>
+                                        <ArrowUpRight size={18} aria-hidden="true" />
                                     </span>
-                                ))}
-                            </div>
+                                </div>
+                                <h3 className={`font-display mb-3 text-xl font-bold transition-colors duration-200 ${
+                                    darkMode ? 'text-white group-hover:text-indigo-300' : 'text-slate-900 group-hover:text-indigo-700'
+                                }`}>
+                                    {project.title}
+                                </h3>
+                                <p className={`mb-6 flex-1 text-sm leading-relaxed ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>
+                                    {project.description}
+                                </p>
+                                <div className="mt-auto flex flex-wrap gap-2">
+                                    {project.tags.map((tag) => (
+                                        <span
+                                            key={tag}
+                                            className={`rounded-md px-2.5 py-1 text-xs font-medium ${
+                                                darkMode ? 'bg-indigo-500/15 text-indigo-200' : 'bg-indigo-50 text-indigo-700'
+                                            }`}
+                                        >
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            </GlassCard>
                         </motion.a>
                     ))}
                 </div>

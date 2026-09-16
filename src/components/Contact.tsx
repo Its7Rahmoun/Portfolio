@@ -1,7 +1,9 @@
-
+import { FormEvent, useState } from 'react';
 import { PortfolioData } from '@/hooks/usePortfolioData';
 import { motion } from 'motion/react';
 import { Mail, Linkedin, Github, MapPin, Send } from 'lucide-react';
+import { GlassCard } from '@/components/layout/GlassCard';
+import { SectionHeader } from '@/components/layout/SectionHeader';
 
 interface ContactProps {
     darkMode: boolean;
@@ -12,145 +14,116 @@ interface ContactProps {
 
 export function Contact({ darkMode, language, contact, profile }: ContactProps) {
     const currentYear = new Date().getFullYear();
+    const [status, setStatus] = useState('');
+
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const form = new FormData(event.currentTarget);
+        const name = String(form.get('name') || '');
+        const email = String(form.get('email') || '');
+        const message = String(form.get('message') || '');
+        const subject = encodeURIComponent(`Portfolio contact from ${name}`);
+        const body = encodeURIComponent(`${message}\n\nFrom: ${name} <${email}>`);
+        window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
+        setStatus(language === 'en' ? 'Opening your email client…' : 'Ouverture de votre client e-mail…');
+    };
+
+    const fieldClass = `w-full rounded-xl border px-4 py-3 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 ${
+        darkMode
+            ? 'border-white/15 bg-black/30 text-white placeholder:text-slate-500'
+            : 'border-slate-200 bg-white text-slate-900 placeholder:text-slate-400'
+    }`;
 
     return (
-        <footer id="contact" className={`py-32 pb-0 ${darkMode ? 'bg-[#0B1120] text-white' : 'bg-gray-50 text-gray-900'}`}>
-            <div className="max-w-7xl mx-auto px-6 lg:px-12">
-
-                {/* Header */}
-                <div className="text-center mb-24">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                            {language === 'en' ? "Let's Work Together" : "Travaillons Ensemble"}
-                        </h2>
-                        <p className={`text-lg max-w-2xl mx-auto ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                            {language === 'en'
-                                ? "Available for freelance work, full-time opportunities, and consulting. Let's discuss how I can help build your next project."
-                                : "Disponible pour des missions freelance, des opportunités à temps plein et du consulting. Discutons de la manière dont je peux vous aider à construire votre prochain projet."}
-                        </p>
-                    </motion.div>
-                </div>
-
-                <div className="grid lg:grid-cols-5 gap-12 lg:gap-24 mb-32">
-
-                    {/* Left Column: Contact Info */}
-                    <div className="lg:col-span-2 space-y-6">
-                        <h3 className="text-2xl font-bold mb-8">
+        <footer id="contact" className="pb-0 pt-24 md:pt-32">
+            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                <SectionHeader
+                    darkMode={darkMode}
+                    title={language === 'en' ? "Let's Work Together" : 'Travaillons Ensemble'}
+                    subtitle={contact.message || (language === 'en'
+                        ? 'Available for freelance work, full-time opportunities, and consulting.'
+                        : 'Disponible pour du freelance, du temps plein et du consulting.')}
+                />
+                <div className="mb-24 grid gap-10 lg:grid-cols-5 lg:gap-16">
+                    <div className="space-y-4 lg:col-span-2">
+                        <h3 className="font-display mb-6 text-2xl font-bold">
                             {language === 'en' ? 'Contact Information' : 'Coordonnées'}
                         </h3>
-
-                        {/* Email */}
-                        <div className={`p-6 rounded-2xl flex items-center gap-4 ${darkMode ? 'bg-[#151B2E] border border-white/5' : 'bg-white border border-gray-100 shadow-md'}`}>
-                            <div className="p-3 bg-blue-500/10 rounded-full text-blue-500">
-                                <Mail size={24} />
+                        {[
+                            { icon: Mail, label: 'Email', href: `mailto:${profile.email}`, value: profile.email },
+                            { icon: Linkedin, label: 'LinkedIn', href: profile.social.linkedin, value: 'linkedin.com/in/oussama-rahmoun' },
+                            { icon: Github, label: 'GitHub', href: profile.social.github, value: 'github.com/Its7Rahmoun' },
+                        ].map((item) => (
+                            <GlassCard key={item.label} darkMode={darkMode} className="flex items-center gap-4 p-5">
+                                <div className="rounded-full bg-blue-500/15 p-3 text-blue-400">
+                                    <item.icon size={22} aria-hidden="true" />
+                                </div>
+                                <div>
+                                    <p className={`mb-1 text-xs font-semibold uppercase ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>{item.label}</p>
+                                    <a
+                                        href={item.href}
+                                        target={item.href.startsWith('http') ? '_blank' : undefined}
+                                        rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                                        className="cursor-pointer font-medium hover:text-blue-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300"
+                                    >
+                                        {item.value}
+                                    </a>
+                                </div>
+                            </GlassCard>
+                        ))}
+                        <GlassCard darkMode={darkMode} className="flex items-center gap-4 p-5">
+                            <div className="rounded-full bg-violet-500/15 p-3 text-violet-400">
+                                <MapPin size={22} aria-hidden="true" />
                             </div>
                             <div>
-                                <p className={`text-xs uppercase font-semibold mb-1 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>Email</p>
-                                <a href={`mailto:${profile.email}`} className="font-medium hover:text-blue-500 transition-colors">
-                                    {profile.email}
-                                </a>
+                                <p className={`mb-1 text-xs font-semibold uppercase ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Location</p>
+                                <p className="font-medium">{profile.location} · {language === 'en' ? 'Remote available' : 'Télétravail possible'}</p>
                             </div>
-                        </div>
-
-                        {/* LinkedIn */}
-                        <div className={`p-6 rounded-2xl flex items-center gap-4 ${darkMode ? 'bg-[#151B2E] border border-white/5' : 'bg-white border border-gray-100 shadow-md'}`}>
-                            <div className="p-3 bg-blue-700/10 rounded-full text-blue-700">
-                                <Linkedin size={24} />
-                            </div>
-                            <div>
-                                <p className={`text-xs uppercase font-semibold mb-1 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>LinkedIn</p>
-                                <a href={profile.social.linkedin} target="_blank" rel="noreferrer" className="font-medium hover:text-blue-500 transition-colors">
-                                    {profile.social.linkedin ? profile.social.linkedin.replace('https://', '') : 'linkedin.com/in/rahmounoussama'}
-                                </a>
-                            </div>
-                        </div>
-
-                        {/* GitHub */}
-                        <div className={`p-6 rounded-2xl flex items-center gap-4 ${darkMode ? 'bg-[#151B2E] border border-white/5' : 'bg-white border border-gray-100 shadow-md'}`}>
-                            <div className="p-3 bg-gray-500/10 rounded-full text-gray-500">
-                                <Github size={24} />
-                            </div>
-                            <div>
-                                <p className={`text-xs uppercase font-semibold mb-1 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>GitHub</p>
-                                <a href={profile.social.github} target="_blank" rel="noreferrer" className="font-medium hover:text-blue-500 transition-colors">
-                                    {profile.social.github ? profile.social.github.replace('https://', '') : 'github.com/rahmounoussama'}
-                                </a>
-                            </div>
-                        </div>
-
-                        {/* Location */}
-                        <div className={`p-6 rounded-2xl flex items-center gap-4 ${darkMode ? 'bg-[#151B2E] border border-white/5' : 'bg-white border border-gray-100 shadow-md'}`}>
-                            <div className="p-3 bg-purple-500/10 rounded-full text-purple-500">
-                                <MapPin size={24} />
-                            </div>
-                            <div>
-                                <p className={`text-xs uppercase font-semibold mb-1 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>Location</p>
-                                <p className="font-medium">
-                                    {language === 'en' ? 'Available for remote work' : 'Disponible pour le télétravail'}
-                                </p>
-                            </div>
-                        </div>
-
-                        <p className={`text-sm mt-8 leading-relaxed ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                            {language === 'en'
-                                ? "Passionate about building scalable cloud solutions and would love to discuss opportunities where I can contribute my expertise in Java, AWS, microservices, and system architecture."
-                                : "Passionné par la création de solutions cloud évolutives, je serais ravi de discuter d'opportunités où je pourrais apporter mon expertise en Java, AWS, microservices et architecture système."}
-                        </p>
+                        </GlassCard>
                     </div>
 
-                    {/* Right Column: Form */}
-                    <div className={`lg:col-span-3 p-8 md:p-10 rounded-3xl border ${darkMode ? 'bg-[#151B2E] border-white/5' : 'bg-white border-gray-100 shadow-xl'}`}>
-                        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                            <div className="grid md:grid-cols-2 gap-6">
+                    <GlassCard darkMode={darkMode} className="p-6 md:p-10 lg:col-span-3">
+                        <form className="space-y-6" onSubmit={handleSubmit}>
+                            <div className="grid gap-6 md:grid-cols-2">
                                 <div className="space-y-2">
-                                    <label className={`text-sm font-semibold ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                                    <label htmlFor="name" className={`text-sm font-semibold ${darkMode ? 'text-slate-200' : 'text-slate-700'}`}>
                                         {language === 'en' ? 'Your Name' : 'Votre Nom'}
                                     </label>
-                                    <input
-                                        type="text"
-                                        placeholder="John Doe"
-                                        className={`w-full px-4 py-3 rounded-xl border appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all ${darkMode ? 'bg-[#0B1120] border-white/10 text-white placeholder-gray-600' : 'bg-gray-50 border-gray-200 text-gray-900 placeholder-gray-400'}`}
-                                    />
+                                    <input id="name" name="name" type="text" required autoComplete="name" placeholder="Jane Doe" className={fieldClass} />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className={`text-sm font-semibold ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                                    <label htmlFor="email" className={`text-sm font-semibold ${darkMode ? 'text-slate-200' : 'text-slate-700'}`}>
                                         {language === 'en' ? 'Your Email' : 'Votre Email'}
                                     </label>
-                                    <input
-                                        type="email"
-                                        placeholder="john@example.com"
-                                        className={`w-full px-4 py-3 rounded-xl border appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all ${darkMode ? 'bg-[#0B1120] border-white/10 text-white placeholder-gray-600' : 'bg-gray-50 border-gray-200 text-gray-900 placeholder-gray-400'}`}
-                                    />
+                                    <input id="email" name="email" type="email" required autoComplete="email" placeholder="jane@example.com" className={fieldClass} />
                                 </div>
                             </div>
-
                             <div className="space-y-2">
-                                <label className={`text-sm font-semibold ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                                <label htmlFor="message" className={`text-sm font-semibold ${darkMode ? 'text-slate-200' : 'text-slate-700'}`}>
                                     {language === 'en' ? 'Message' : 'Message'}
                                 </label>
                                 <textarea
+                                    id="message"
+                                    name="message"
+                                    required
                                     rows={6}
-                                    placeholder={language === 'en' ? 'Tell me about your project or opportunity...' : 'Parlez-moi de votre projet ou opportunité...'}
-                                    className={`w-full px-4 py-3 rounded-xl border appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none ${darkMode ? 'bg-[#0B1120] border-white/10 text-white placeholder-gray-600' : 'bg-gray-50 border-gray-200 text-gray-900 placeholder-gray-400'}`}
+                                    placeholder={language === 'en' ? 'Tell me about your project or opportunity…' : 'Parlez-moi de votre projet ou opportunité…'}
+                                    className={`${fieldClass} resize-none`}
                                 />
                             </div>
-
-                            <button type="submit" className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all flex items-center justify-center gap-2">
+                            <button
+                                type="submit"
+                                className="flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[var(--color-accent)] py-3 text-lg font-bold text-white transition-all duration-200 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300"
+                            >
                                 {language === 'en' ? 'Send Message' : 'Envoyer le Message'}
-                                <Send size={20} />
+                                <Send size={20} aria-hidden="true" />
                             </button>
+                            {status && <p className="text-sm text-slate-300" role="status">{status}</p>}
                         </form>
-                    </div>
-
+                    </GlassCard>
                 </div>
-
-                {/* Footer */}
-                <div className={`py-8 border-t text-center text-sm ${darkMode ? 'border-white/5 text-gray-500' : 'border-gray-200 text-gray-500'}`}>
-                    <p>© {currentYear} {profile.name}. Built with React, Tailwind CSS, and Motion.</p>
+                <div className={`py-8 text-center text-sm ${darkMode ? 'border-t border-white/10 text-slate-400' : 'border-t border-slate-200 text-slate-500'}`}>
+                    <p>© {currentYear} {profile.name}. Built with React, Three.js, and Motion.</p>
                 </div>
             </div>
         </footer>

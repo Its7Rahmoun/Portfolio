@@ -1,8 +1,8 @@
 {
     "profile": {
         "name": "Rahmoun Oussama",
-        "title": "Full Stack Engineer | Cloud Engineer",
-        "bio": "AWS Certified Cloud Solutions Architect Associate. Passionate about building robust, scalable cloud-native applications and microservices.",
+        "title": "Full Stack Developer | Cloud Engineer | AI",
+        "bio": "AWS Certified Solutions Architect. I design scalable cloud-native systems and multi-agent AI workflows that ship faster and stay reliable.",
         "location": "Casablanca, Morocco",
         "email": "rahmoun.oussamaeng@gmail.com",
         "social": {
@@ -31,23 +31,8 @@
                 "React",
                 "Hibernate",
                 "Flask",
-                "ExpressJs",
-                "NextJs"
-            ]
-        },
-        {
-            "category": "Cloud & DevOps",
-            "items": [
-                "AWS (ECS, Lambda, EC2, S3, CloudWatch, IAM, VPC, SNS, SQS, EventBridge)",
-                "Kubernetes",
-                "Docker",
-                "Git",
-                "GitHub Actions",
-                "Jenkins",
-                "CI/CD pipelines",
-                "Terraform",
-                "CloudFormation",
-                "GCP"
+                "Express.js",
+                "Next.js"
             ]
         },
         {
@@ -74,6 +59,21 @@
             ]
         },
         {
+            "category": "Cloud & DevOps",
+            "items": [
+                "AWS (ECS, Lambda, EC2, S3, CloudWatch, IAM, VPC, SNS, SQS, EventBridge)",
+                "GCP",
+                "Kubernetes",
+                "Docker",
+                "Git",
+                "GitHub Actions",
+                "Jenkins",
+                "CI/CD",
+                "Terraform",
+                "CloudFormation"
+            ]
+        },
+        {
             "category": "Data & Messaging",
             "items": [
                 "Kafka",
@@ -93,7 +93,7 @@
             ]
         },
         {
-            "category": "Testing & Tools",
+            "category": "Testing & Tools & OS",
             "items": [
                 "Postman",
                 "Swagger/OpenAPI",
@@ -108,16 +108,20 @@
                 "Reinforcement Learning",
                 "Deep Learning",
                 "NLP",
-                "AI-Augmented Development"
+                "AI-Augmented Development",
+                "Multi-Agent Orchestration",
+                "MCP (Model Context Protocol)",
+                "Agent-to-Agent (A2A) Protocol",
+                "Prompt/Context Engineering"
             ]
         }
     ],
     "projects": [
         {
             "id": "1",
-            "title": "Recruitment Platform with AI",
+            "title": "Job Sourcing",
             "coverName": "job-sourcing",
-            "description": "Developed and Deployed a microservices-based recruitment platform with integrated AI features, enabling efficient candidate-job matching, streamlined hiring processes, and low-latency performance.",
+            "description": "Developed and deployed a microservices-based recruitment platform with integrated AI features, enabling efficient candidate-job matching, streamlined hiring processes, and low-latency performance.",
             "image": "",
             "link": "",
             "github": "",
@@ -128,13 +132,16 @@
                 "Cloud",
                 "AWS"
             ],
-            "highlights": []
+            "highlights": [
+                { "label": "AI candidate-job matching" },
+                { "label": "Low-latency microservices" }
+            ]
         },
         {
             "id": "2",
-            "title": "QBDEX - Pharmaceutical Quality by Design",
+            "title": "QBDEX",
             "coverName": "qbdex",
-            "description": "Built QBDEX, a pharmaceutical Quality by Design (QbD) application, enabling streamlined experimental planning, process optimization, and enhanced regulatory compliance.",
+            "description": "Built a pharmaceutical Quality by Design (QbD) application, enabling streamlined experimental planning, process optimization, and enhanced regulatory compliance.",
             "image": "",
             "link": "",
             "github": "",
@@ -142,27 +149,57 @@
             "tags": [
                 "Optimization",
                 "Compliance",
-                "AWS"
+                "AWS",
+                "Pharma"
             ],
-            "highlights": []
+            "highlights": [
+                { "label": "Experimental planning" },
+                { "label": "Regulatory compliance" }
+            ]
         },
         {
             "id": "3",
-            "title": "Zenger - News Management System",
+            "title": "Paperclip",
+            "coverName": "paperclip",
+            "description": "Node.js/React platform orchestrating a team of AI development agents (Manager, PO, Frontend Developer, Backend Developer) to run software projects end-to-end. Each agent is assigned per-project skills, permissions, and MCP tool access. Manager/PO agents split incoming tasks, synchronize work across dev agents, and push code and open pull requests directly on GitHub via MCP integration, all tracked from a single dashboard.",
+            "image": "",
+            "link": "",
+            "github": "",
+            "year": "2026",
+            "tags": [
+                "Node.js",
+                "React",
+                "MCP",
+                "Multi-Agent",
+                "GitHub"
+            ],
+            "highlights": [
+                { "label": "4 coordinated agents" },
+                { "label": "MCP GitHub PRs" },
+                { "label": "~30% faster delivery" }
+            ]
+        },
+        {
+            "id": "4",
+            "title": "Zenger",
             "coverName": "zenger",
-            "description": "A news management and distribution system ensuring 100% verification through AI. Designed to guarantee accuracy, credibility, and real-time delivery of media content.",
+            "description": "Full-stack journalism platform powering editorial workflow end-to-end: pitch intake, rich story editing with style checking, media attachments, and channel-based outlet distribution. Includes NewsFindr, an A2A-protocol AI agent orchestrator (Google ADK + Gemini) coordinating specialized sub-agents to detect news events and produce structured flash stories autonomously.",
             "image": "",
             "link": "",
             "github": "",
             "year": "2026",
             "tags": [
                 "AI",
-                "Real-time",
-                "Media",
+                "A2A",
+                "Gemini",
                 "GCP",
-                "GKE"
+                "Journalism"
             ],
-            "highlights": []
+            "highlights": [
+                { "label": "NewsFindr A2A orchestrator" },
+                { "label": "Google ADK + Gemini" },
+                { "label": "Editorial workflow E2E" }
+            ]
         }
     ],
     "personalProjects": [
@@ -202,27 +239,29 @@
     ],
     "experience": [
         {
-            "year": "Nov 2024 – Present",
-            "title": "Full Stack Developer | Cloud Engineer",
-            "company": "Centoria Services / Casablanca, Maroc",
+            "year": "Nov 2025 – Present",
+            "title": "Full Stack Developer | Cloud Engineer | AI",
+            "company": "Centoria Services — Casablanca, Morocco",
             "details": [
                 "Designed and developed web applications using Spring Boot, Node.js, Express.js, and Next.js, optimized for high performance and low latency.",
-                "Implemented CI/CD pipelines on Google Cloud to automate build, testing, and deployment processes, reducing manual errors and accelerating releases.",
-                "Deployed applications on Google Kubernetes Engine (GKE) using GitOps strategies with ArgoCD, improving deployment reliability and reproducibility.",
-                "Designed scalable cloud architectures on GCP (GKE, Cloud Run, Cloud Storage) ensuring high availability and automatic scaling."
+                "Implemented CI/CD pipelines on Google Cloud to automate build, testing, and deployment, reducing manual errors and accelerating releases.",
+                "Deployed applications on Google Kubernetes Engine (GKE) using GitHub Actions, improving deployment reliability and reproducibility.",
+                "Designed scalable cloud architectures on GCP (GKE, Cloud Run, Cloud Storage) ensuring high availability and automatic scaling.",
+                "Designed and implemented an AI agent orchestration system using an A2A (Agent-to-Agent) protocol, where a primary agent dynamically coordinates specialized sub-agents to detect breaking news events and generate flash stories in real time.",
+                "Championed the shift toward AI-augmented, agentic development, onboarding the team onto AI coding tools and agent-driven workflows that boosted engineering efficiency and cut feature build time by ~3x."
             ],
             "metrics": [
                 {
-                    "value": "100%",
-                    "label": "Automated"
+                    "value": "~3x",
+                    "label": "Faster builds"
                 },
                 {
-                    "value": "GCP",
-                    "label": "Environment"
+                    "value": "GKE",
+                    "label": "Deployments"
                 },
                 {
-                    "value": "Low",
-                    "label": "Latency"
+                    "value": "A2A",
+                    "label": "Orchestration"
                 }
             ],
             "technologies": [
@@ -230,47 +269,93 @@
                 "Node.js",
                 "Next.js",
                 "GCP",
-                "Kubernetes",
-                "ArgoCD",
-                "Docker"
+                "GKE",
+                "GitHub Actions",
+                "A2A",
+                "Gemini"
             ]
         },
         {
             "year": "Jan 2024 – Oct 2025",
             "title": "Full Stack Developer | AWS DevOps Engineer",
-            "company": "OpenMind Services | Casablanca, Morocco",
+            "company": "OpenMind Services — Casablanca, Morocco",
             "details": [
-                "Designed and developed multiple enterprise-level microservice applications using Spring Boot, Spring Cloud, Angular, and Docker, with Keycloak authentication.",
-                "Improved system efficiency by 11% and reduced response time by 20% across critical modules.",
-                "Built robust microservices communication using REST APIs and Kafka/AWS SQS across 15+ distributed microservices.",
-                "Integrated AI-powered features with Large Language Models (LLMs) into large-scale microservices, automating processing of tens of thousands of records per month.",
-                "Implemented and optimized CI/CD pipelines for a 5-developer team, reducing deployment time from hours to under 1 hour (75% faster).",
-                "Delivered robust infrastructure solutions leveraging serverless and compute services (ECS, EKS, EC2).",
-                "Enhanced cloud security, protecting sensitive data, reducing unauthorized access incidents by 90%.",
-                "Engineered an event-driven architecture to enable asynchronous communication, improve scalability, and decouple services. "
+                "Designed and developed multiple enterprise-level microservice applications using Spring Boot, Spring Cloud, Angular, and Docker, with Keycloak authentication securing sensitive data for 10,000+ active users. Improved system efficiency by 11% and reduced response time by 20% across critical modules.",
+                "Built robust microservices communication using REST APIs for synchronous calls and Kafka/AWS SQS for asynchronous messaging across 15+ distributed microservices, improving data throughput by 35%, reducing inter-service latency by 25%, and enabling seamless horizontal scalability.",
+                "Integrated AI-powered features with Large Language Models (LLMs) into large-scale microservices, automating processing of tens of thousands of records per month, improving workflow efficiency by 40%.",
+                "Implemented and optimized CI/CD pipelines for a 5-developer team, reducing deployment time from hours to under 1 hour (75% faster), doubling release frequency, and enabling continuous delivery across 15+ microservices in production.",
+                "Delivered robust infrastructure solutions leveraging serverless and compute services (ECS, EKS, EC2), supporting automatic scaling and ensuring 99.9% uptime under peak loads.",
+                "Enhanced cloud security, reducing unauthorized access incidents by 90%.",
+                "Engineered an event-driven architecture to enable asynchronous communication, improve scalability, and decouple services."
             ],
             "metrics": [
                 {
-                    "value": "99.99%",
-                    "label": "Availability"
+                    "value": "10,000+",
+                    "label": "Active users"
+                },
+                {
+                    "value": "99.9%",
+                    "label": "Uptime"
                 },
                 {
                     "value": "75%",
-                    "label": "Faster Deploy"
+                    "label": "Faster deploys"
                 },
                 {
                     "value": "90%",
-                    "label": "Less Incidents"
+                    "label": "Fewer incidents"
+                },
+                {
+                    "value": "40%",
+                    "label": "Workflow gain"
+                },
+                {
+                    "value": "15+",
+                    "label": "Microservices"
                 }
             ],
             "technologies": [
                 "Spring Boot",
                 "Angular",
-                "AWS EKS",
+                "AWS ECS",
+                "EKS",
                 "Kafka",
-                "Docker",
                 "Keycloak",
-                "Terraform"
+                "Terraform",
+                "LLMs"
+            ]
+        },
+        {
+            "year": "Freelance — Ongoing",
+            "title": "Freelance Cloud & AI Consultant",
+            "company": "Independent / Remote — Startups (Multiple Clients)",
+            "details": [
+                "Acted as an independent AWS consultant for early-stage startups, monitoring and reviewing existing cloud architectures to catch scalability, cost, and security risks early, giving founders a fractional cloud architect without a full-time hire.",
+                "Advised multiple startup clients on infrastructure decisions, helping them avoid costly rework and over-provisioning as they scaled.",
+                "Built and customized a multi-agent AI development platform (see Projects — Paperclip) for startup clients, tailoring agent roles, skills, and permissions to each team's workflow.",
+                "Cut AI/LLM hallucinations by ~20% and reduced token/API cost by tightening the context and scope given to each agent, making AI-assisted development materially cheaper and more reliable for clients.",
+                "Sped up feature delivery by ~30% for client engineering teams by automating task breakdown, implementation, and PR creation across coordinated dev agents."
+            ],
+            "metrics": [
+                {
+                    "value": "~20%",
+                    "label": "Fewer hallucinations"
+                },
+                {
+                    "value": "~30%",
+                    "label": "Faster delivery"
+                },
+                {
+                    "value": "Multi",
+                    "label": "Startup clients"
+                }
+            ],
+            "technologies": [
+                "AWS",
+                "Multi-Agent",
+                "MCP",
+                "Paperclip",
+                "Prompt Engineering"
             ]
         }
     ],
@@ -288,62 +373,62 @@
     ],
     "education": [
         {
-            "degree": "Master’s Degree Computer Science",
+            "degree": "Master's Degree, Computer Science",
             "school": "Faculty of Science and Technology",
-            "year": "2022 - 2024",
+            "year": "2022 – 2024",
             "description": "Specialized in Software Engineering and Cloud Computing"
         },
         {
-            "degree": "Bachelor’s Degree Computer Engineering",
+            "degree": "Bachelor's Degree, Computer Engineering",
             "school": "Faculty of Sciences and Technologies",
-            "year": "2021 - 2022",
+            "year": "2021 – 2022",
             "description": "Focus on Computer Systems & Networks"
         }
     ],
     "languages": [
         {
             "language": "English",
-            "level": "Professional Working Proficiency",
+            "level": "Advanced",
             "code": "GB",
             "percentage": 90
         },
         {
             "language": "French",
-            "level": "Professional Working Proficiency",
+            "level": "Intermediate",
             "code": "FR",
-            "percentage": 75
+            "percentage": 65
         },
         {
             "language": "Turkish",
-            "level": "Native or Bilingual",
+            "level": "Advanced",
             "code": "TR",
-            "percentage": 70
+            "percentage": 85
         },
         {
             "language": "Arabic",
-            "level": "Native or Bilingual",
+            "level": "Native",
             "code": "SA",
             "percentage": 100
         }
     ],
     "aboutHighlights": [
         {
-            "icon": "🏗️",
+            "icon": "layers",
             "text": "Microservices & Cloud",
             "textFr": "Microservices & Cloud"
         },
         {
-            "icon": "🤖",
-            "text": "AI Integration",
-            "textFr": "Intégration IA"
+            "icon": "bot",
+            "text": "AI Agent Orchestration",
+            "textFr": "Orchestration d'agents IA"
         },
         {
-            "icon": "☁️",
+            "icon": "cloud",
             "text": "AWS Solution Architect",
             "textFr": "Architecte AWS"
         },
         {
-            "icon": "🔧",
+            "icon": "workflow",
             "text": "DevOps & CI/CD",
             "textFr": "DevOps & CI/CD"
         }

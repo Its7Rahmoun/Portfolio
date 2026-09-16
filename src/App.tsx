@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';
@@ -11,12 +11,16 @@ import { Languages } from '@/components/Languages';
 import { Contact } from '@/components/Contact';
 import { usePortfolioData } from '@/hooks/usePortfolioData';
 
+const UniverseBackground = lazy(() =>
+    import('@/components/universe/UniverseBackground').then((module) => ({ default: module.UniverseBackground })),
+);
+
 export default function App() {
     const [darkMode, setDarkMode] = useState(true);
     const [language, setLanguage] = useState<'en' | 'fr'>('en');
+    const [universeEnabled, setUniverseEnabled] = useState(true);
     const { data, isLoading, isError } = usePortfolioData();
 
-    // Apply dark mode class to document
     useEffect(() => {
         if (darkMode) {
             document.documentElement.classList.add('dark');
@@ -26,23 +30,42 @@ export default function App() {
     }, [darkMode]);
 
     if (isLoading) {
-        return <div className="flex items-center justify-center min-h-screen bg-slate-950 text-white">Loading...</div>;
+        return (
+            <div className="flex min-h-screen items-center justify-center bg-[#05060c] text-white">
+                Loading...
+            </div>
+        );
     }
 
     if (isError || !data) {
-        return <div className="flex items-center justify-center min-h-screen bg-slate-950 text-red-500">Error loading portfolio data</div>;
+        return (
+            <div className="flex min-h-screen items-center justify-center bg-[#05060c] text-red-400">
+                Error loading portfolio data
+            </div>
+        );
     }
 
     return (
-        <div className={`${darkMode ? 'bg-slate-950 text-white' : 'bg-white text-gray-900'} antialiased transition-colors duration-300`}>
+        <div className={`${darkMode ? 'text-white' : 'text-slate-900'} relative min-h-screen antialiased`}>
+            <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[80] focus:rounded-lg focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-white"
+            >
+                Skip to main content
+            </a>
+            <Suspense fallback={null}>
+                <UniverseBackground enabled={universeEnabled} lightMode={!darkMode} />
+            </Suspense>
             <Navigation
                 darkMode={darkMode}
                 setDarkMode={setDarkMode}
                 language={language}
                 setLanguage={setLanguage}
                 profile={data.profile}
+                universeEnabled={universeEnabled}
+                setUniverseEnabled={setUniverseEnabled}
             />
-            <main>
+            <main id="main-content" className="relative z-10">
                 <Hero darkMode={darkMode} language={language} profile={data.profile} />
                 <About
                     darkMode={darkMode}

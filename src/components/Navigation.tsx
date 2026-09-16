@@ -1,7 +1,8 @@
 import { motion } from 'motion/react';
-import { Moon, Sun, Globe } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { Moon, Sun, Globe, Menu, X, Sparkles } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { PortfolioData } from '@/hooks/usePortfolioData';
+import { useScrollProgress } from '@/lib/useScrollProgress';
 
 const navItems = [
     { label: 'Home', labelFr: 'Accueil', href: '#home' },
@@ -19,14 +20,24 @@ interface NavigationProps {
     language: 'en' | 'fr';
     setLanguage: (value: 'en' | 'fr') => void;
     profile: PortfolioData['profile'];
+    universeEnabled: boolean;
+    setUniverseEnabled: (value: boolean) => void;
 }
 
-export function Navigation({ darkMode, setDarkMode, language, setLanguage, profile }: NavigationProps) {
+export function Navigation({
+    darkMode,
+    setDarkMode,
+    language,
+    setLanguage,
+    profile,
+    universeEnabled,
+    setUniverseEnabled,
+}: NavigationProps) {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
+    const progress = useScrollProgress();
 
-    // Extract initials from profile name
     const initials = profile.name
         ? profile.name.split(' ').map((n) => n[0]).join('').substring(0, 2).toUpperCase()
         : 'RO';
@@ -34,21 +45,17 @@ export function Navigation({ darkMode, setDarkMode, language, setLanguage, profi
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
-
-            // Update active section based on scroll position
-            const sections = navItems.map(item => item.href.slice(1));
-            const current = sections.find(section => {
+            const sections = navItems.map((item) => item.href.slice(1));
+            const current = sections.find((section) => {
                 const element = document.getElementById(section);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    return rect.top <= 150 && rect.bottom >= 150;
-                }
-                return false;
+                if (!element) return false;
+                const rect = element.getBoundingClientRect();
+                return rect.top <= 150 && rect.bottom >= 150;
             });
             if (current) setActiveSection(current);
         };
 
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -60,158 +67,146 @@ export function Navigation({ darkMode, setDarkMode, language, setLanguage, profi
         }
     };
 
+    const controlClass = `flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 ${
+        darkMode ? 'bg-white/10 text-white hover:bg-white/20' : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
+    }`;
+
     return (
         <motion.nav
-            initial={{ y: -100 }}
+            initial={{ y: -80 }}
             animate={{ y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-                ? darkMode
-                    ? 'bg-slate-950/80 backdrop-blur-xl border-b border-white/10'
-                    : 'bg-white/80 backdrop-blur-xl border-b border-gray-200'
-                : 'bg-transparent'
-                }`}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className={`fixed left-0 right-0 top-0 z-50 transition-all duration-200 ${
+                scrolled
+                    ? darkMode
+                        ? 'border-b border-white/15 bg-[#0B0B10]/70 backdrop-blur-[15px]'
+                        : 'border-b border-slate-200 bg-white/80 backdrop-blur-[15px]'
+                    : 'bg-transparent'
+            }`}
         >
-            <div className="max-w-7xl mx-auto px-6 lg:px-12">
-                <div className="flex items-center justify-between h-20">
-                    {/* Logo */}
-                    <motion.a
+            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                <div className="flex h-20 items-center justify-between">
+                    <a
                         href="#home"
                         onClick={(e) => {
                             e.preventDefault();
                             scrollToSection('#home');
                         }}
-                        className={`flex items-center gap-2 text-xl font-bold tracking-tight ${darkMode ? 'text-white' : 'text-gray-900'
-                            }`}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        className={`flex min-h-11 cursor-pointer items-center gap-2 text-xl font-bold tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 ${
+                            darkMode ? 'text-white' : 'text-slate-900'
+                        }`}
                     >
-                        <div className="relative w-10 h-10">
-                            <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg" />
-                            <div className="absolute inset-0.5 bg-gradient-to-br from-slate-950 to-slate-900 rounded-lg flex items-center justify-center">
-                                <span className="text-white font-bold text-lg">{initials}</span>
-                            </div>
-                        </div>
-                    </motion.a>
+                        <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-blue-500 to-cyan-400 font-display text-white">
+                            {initials}
+                        </span>
+                        <span className="sr-only">{profile.name}</span>
+                    </a>
 
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-1">
+                    <div className="hidden items-center gap-1 lg:flex">
                         {navItems.map((item) => (
-                            <motion.a
+                            <a
                                 key={item.href}
                                 href={item.href}
                                 onClick={(e) => {
                                     e.preventDefault();
                                     scrollToSection(item.href);
                                 }}
-                                className={`relative px-4 py-2 text-sm transition-colors ${activeSection === item.href.slice(1)
-                                    ? darkMode
-                                        ? 'text-white'
-                                        : 'text-gray-900'
-                                    : darkMode
-                                        ? 'text-white/60 hover:text-white'
-                                        : 'text-gray-600 hover:text-gray-900'
-                                    }`}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
+                                className={`relative min-h-11 cursor-pointer px-3 py-2 text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 ${
+                                    activeSection === item.href.slice(1)
+                                        ? darkMode
+                                            ? 'text-white'
+                                            : 'text-slate-900'
+                                        : darkMode
+                                            ? 'text-slate-300 hover:text-white'
+                                            : 'text-slate-600 hover:text-slate-900'
+                                }`}
                             >
                                 {language === 'en' ? item.label : item.labelFr}
                                 {activeSection === item.href.slice(1) && (
-                                    <motion.div
+                                    <motion.span
                                         layoutId="activeNav"
-                                        className={`absolute inset-0 rounded-lg -z-10 ${darkMode ? 'bg-white/10' : 'bg-gray-200'
-                                            }`}
-                                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                                        className={`absolute inset-0 -z-10 rounded-lg ${darkMode ? 'bg-white/10' : 'bg-slate-200'}`}
+                                        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                                     />
                                 )}
-                            </motion.a>
+                            </a>
                         ))}
                     </div>
 
-                    {/* Controls */}
-                    <div className="flex items-center gap-4">
-                        {/* Language Toggle */}
-                        <motion.button
+                    <div className="flex items-center gap-2">
+                        <button
+                            type="button"
+                            onClick={() => setUniverseEnabled(!universeEnabled)}
+                            aria-pressed={universeEnabled}
+                            aria-label={universeEnabled ? 'Disable 3D universe' : 'Enable 3D universe'}
+                            className={`${controlClass} hidden md:flex`}
+                            title={universeEnabled ? 'Disable 3D' : 'Enable 3D'}
+                        >
+                            <Sparkles size={16} className={universeEnabled ? 'text-blue-400' : ''} />
+                        </button>
+                        <button
+                            type="button"
                             onClick={() => setLanguage(language === 'en' ? 'fr' : 'en')}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            className={`hidden md:flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${darkMode
-                                ? 'bg-white/10 text-white/80 hover:bg-white/20'
-                                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                                }`}
+                            aria-label="Toggle language"
+                            className={`${controlClass} hidden gap-2 px-3 md:flex`}
                         >
                             <Globe size={16} />
                             <span className="text-xs font-semibold uppercase">{language}</span>
-                        </motion.button>
-
-                        {/* Dark Mode Toggle */}
-                        <motion.button
+                        </button>
+                        <button
+                            type="button"
                             onClick={() => setDarkMode(!darkMode)}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            className={`p-2 rounded-lg transition-colors ${darkMode
-                                ? 'bg-white/10 text-white/80 hover:bg-white/20'
-                                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                                }`}
+                            aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                            className={controlClass}
                         >
                             {darkMode ? <Sun size={18} /> : <Moon size={18} />}
-                        </motion.button>
-
-                        {/* Mobile Menu Button */}
+                        </button>
                         <button
-                            className={`md:hidden p-2 rounded-lg ${darkMode ? 'text-white/80' : 'text-gray-700'
-                                }`}
+                            type="button"
+                            className={`md:hidden ${controlClass}`}
+                            aria-expanded={mobileMenuOpen}
+                            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         >
-                            {mobileMenuOpen ? '✕' : '☰'}
+                            {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
                         </button>
                     </div>
                 </div>
             </div>
+            <div className="h-0.5 w-full bg-white/10" aria-hidden="true">
+                <div
+                    className="h-full bg-[var(--color-accent)] transition-[width] duration-150"
+                    style={{ width: `${Math.min(100, progress * 100)}%` }}
+                />
+            </div>
 
-            {/* Mobile Menu */}
             {mobileMenuOpen && (
-                <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className={`md:hidden ${darkMode ? 'bg-slate-950/95' : 'bg-white/95'
-                        } backdrop-blur-xl border-t ${darkMode ? 'border-white/10' : 'border-gray-200'
-                        }`}
-                >
-                    <div className="flex flex-col p-6 gap-4">
-                        {navItems.map((item, index) => (
-                            <motion.a
+                <div className={`${darkMode ? 'border-white/10 bg-[#0B0B10]/95' : 'border-slate-200 bg-white/95'} border-t backdrop-blur-[15px] md:hidden`}>
+                    <div className="flex flex-col gap-2 p-6">
+                        {navItems.map((item) => (
+                            <a
                                 key={item.href}
                                 href={item.href}
                                 onClick={(e) => {
                                     e.preventDefault();
                                     scrollToSection(item.href);
                                 }}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                className={`text-lg transition-colors ${darkMode
-                                    ? 'text-white/80 hover:text-white'
-                                    : 'text-gray-700 hover:text-gray-900'
-                                    }`}
+                                className={`min-h-11 cursor-pointer rounded-lg px-3 py-2 text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 ${
+                                    darkMode ? 'text-white hover:bg-white/10' : 'text-slate-800 hover:bg-slate-100'
+                                }`}
                             >
                                 {language === 'en' ? item.label : item.labelFr}
-                            </motion.a>
+                            </a>
                         ))}
-                        <div className="flex gap-2 pt-4 border-t border-white/10">
-                            <button
-                                onClick={() => setLanguage(language === 'en' ? 'fr' : 'en')}
-                                className={`flex-1 px-4 py-2 rounded-lg text-sm font-semibold ${darkMode
-                                    ? 'bg-white/10 text-white'
-                                    : 'bg-gray-200 text-gray-700'
-                                    }`}
-                            >
-                                {language === 'en' ? 'FR' : 'EN'}
-                            </button>
-                        </div>
+                        <button
+                            type="button"
+                            onClick={() => setUniverseEnabled(!universeEnabled)}
+                            className={`min-h-11 cursor-pointer rounded-lg px-3 py-2 text-left ${darkMode ? 'bg-white/10 text-white' : 'bg-slate-200 text-slate-800'}`}
+                        >
+                            {universeEnabled ? 'Disable 3D universe' : 'Enable 3D universe'}
+                        </button>
                     </div>
-                </motion.div>
+                </div>
             )}
         </motion.nav>
     );
